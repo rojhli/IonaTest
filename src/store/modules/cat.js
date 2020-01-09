@@ -1,5 +1,6 @@
 const state = {
   list: [],
+  data: {},
   count: 0,
   pageCount: 1,
   currentPageCount: 1
@@ -36,12 +37,28 @@ const actions = {
       .then(response => {
         runMutations(response);
       });
+  },
+
+  findCatById({ commit }, id) {
+    commit("resetCatDataState");
+
+    this._vm.$axios.get(`images/${id}`).then(response => {
+      commit("setCatData", response.data);
+    });
   }
 };
 
 const mutations = {
   setCatList(state, cats) {
     state.list = cats;
+  },
+
+  setCatData(state, cat) {
+    state.data = cat;
+  },
+
+  resetCatDataState(state) {
+    state.data = {};
   },
 
   appendCatList(state, cats) {
