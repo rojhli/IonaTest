@@ -1,5 +1,6 @@
 const state = {
-  all: []
+  all: [],
+  selected: ""
 };
 
 const actions = {
@@ -13,6 +14,10 @@ const actions = {
 const mutations = {
   setBreedList(state, breeds) {
     state.all = breeds;
+  },
+
+  setSelectedBreed(state, breed) {
+    state.selected = breed;
   }
 };
 

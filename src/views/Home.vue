@@ -71,6 +71,16 @@ export default {
   },
 
   computed: {
+    selectedBreed: {
+      get() {
+        return this.$store.state.breed.selected;
+      },
+
+      set(value) {
+        this.$store.commit("breed/setSelectedBreed", value);
+      }
+    },
+
     ...mapState({
       breeds: state => state.breed.all,
       cats: state => state.cat.list,
@@ -80,19 +90,8 @@ export default {
     })
   },
 
-  data() {
-    return {
-      selectedBreed: ""
-    };
-  },
-
   mounted() {
     this.$store.dispatch("breed/getAll");
-
-    if (this.$route.query.search) {
-      this.$store.dispatch("cat/getById", this.$route.query.search);
-      this.selectedBreed = this.$route.query.search;
-    }
   }
 };
 </script>
